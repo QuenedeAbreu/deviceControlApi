@@ -8,12 +8,13 @@ type User = {
   password?: string;
 }
 export const authenticateLdap = async (req: Request, res: Response) => {
-  if (req.headers.secret_key !== process.env.JWT_SECRET) {
-    return res.status(401).json({
-      message: 'Unauthorized'
-    })
-  }
+  // if (req.headers.secret_key !== process.env.JWT_SECRET) {
+  //   return res.status(401).json({
+  //     message: 'Unauthorized'
+  //   })
+  // }
   const user: User = req.body;
+  console.log(user);
   try {
     activedirectory.authenticate(`${user.username}${process.env.AD_SUFIX}`, user.password as string, (err: any, auth: any) => {
       if (auth) {
